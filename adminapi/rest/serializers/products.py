@@ -15,7 +15,7 @@ class AdminProductSerializer(serializers.ModelSerializer):
             ("at512", "crop__512x512"),
         ]
     )
-    final_price = serializers.SerializerMethodField()
+    final_price = serializers.CharField(source="get_final_price", read_only=True)
     avg_rating = serializers.CharField(source="averagereview", read_only=True)
 
     class Meta:
@@ -26,6 +26,7 @@ class AdminProductSerializer(serializers.ModelSerializer):
             "title",
             "price",
             "discount",
+            "quantity",
             "image",
             "status",
             "final_price",
@@ -34,6 +35,3 @@ class AdminProductSerializer(serializers.ModelSerializer):
             "updated_at",
         ]
         read_only_fields = ["uid", "slug", "created_at", "updated_at"]
-
-    def get_final_price(self, object_):
-        return object_.price * (1 - (object_.discount / decimal.Decimal(100)))

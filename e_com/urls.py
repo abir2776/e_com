@@ -56,5 +56,6 @@ urlpatterns = [
         name="token_verify",
     ),
     path("api/v1/admin/", include("adminapi.rest.urls")),
+    path("api/v1/products/", include("store.rest.urls.products")),
     path("admin/", admin.site.urls),
 ]

@@ -1,3 +1,5 @@
+import decimal
+
 from django.db import models
 from django.db.models import Avg
 
@@ -36,6 +38,9 @@ class Product(BaseModelWithUID):
         if reviews["average"] is not None:
             avg = float(reviews["average"])
         return avg
+
+    def get_final_price(self):
+        return self.price * (1 - (self.discount / decimal.Decimal(100)))
 
 
 class ReviewRating(BaseModelWithUID):
