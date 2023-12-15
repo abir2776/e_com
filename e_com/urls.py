@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path, re_path
+from django.urls import path, re_path, include
 
 from rest_framework import permissions
 
@@ -55,5 +55,6 @@ urlpatterns = [
         TokenVerifyView.as_view(),
         name="token_verify",
     ),
+    path("api/v1/admin/", include("adminapi.rest.urls")),
     path("admin/", admin.site.urls),
 ]

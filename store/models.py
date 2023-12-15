@@ -9,6 +9,8 @@ from common.models import BaseModelWithUID
 
 from store.choices import ProductStatus
 
+from .managers import ProductQuerySet
+
 
 class Product(BaseModelWithUID):
     title = models.CharField(max_length=255)
@@ -23,14 +25,13 @@ class Product(BaseModelWithUID):
         db_index=True,
         default=ProductStatus.PUBLISHED,
     )
+    objects = ProductQuerySet.as_manager()
 
     def __str__(self):
         return self.title
 
     def averagereview(self):
-        reviews = ReviewRating.objects.filter(product=self, status=True).aggregate(
-            average=Avg("rating")
-        )
+        reviews = self.reviewrating_set.aggregate(average=Avg("rating"))
         avg = 0
         if reviews["average"] is not None:
             avg = float(reviews["average"])
