@@ -4,6 +4,11 @@ from store.rest.views import products
 
 urlpatterns = [
     path(
+        "<uuid:uid>/ratings",
+        products.CustomerProductRatingListView.as_view(),
+        name="customer-product-rating-list",
+    ),
+    path(
         "<uuid:uid>",
         products.CustomerProductDetailView.as_view(),
         name="customer-product-detail",

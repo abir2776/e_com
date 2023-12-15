@@ -1,6 +1,6 @@
 import decimal
 
-from rest_framework import serializers
+from rest_framework import serializers, generics
 
 from versatileimagefield.serializers import VersatileImageFieldSerializer
 
@@ -39,7 +39,20 @@ class ProductRatingSlimSerializer(serializers.ModelSerializer):
             "created_at",
             "updated_at",
         ]
-        read_only_fields = ("__all__",)
+        read_only_fields = ["uid", "user", "created_at", "updated_at"]
+
+    def create(self, validated_data):
+        user = self.context["request"].user
+        request = self.context["request"]
+        uid = request.parser_context["kwargs"].get("uid")
+        product = generics.get_object_or_404(
+            Product.objects.filter(),
+            uid=uid,
+        )
+        review = ReviewRating.objects.create(
+            product=product, user=user, **validated_data
+        )
+        return review
 
 
 class CustomerProductListSerializer(serializers.ModelSerializer):
