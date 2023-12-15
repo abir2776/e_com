@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "drf_yasg",
     "rest_framework_simplejwt",
     "rest_framework",
+    "core",
 ]
 
 MIDDLEWARE = [
@@ -56,6 +57,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "e_com.urls"
+AUTH_USER_MODEL = "core.User"
 
 TEMPLATES = [
     {
