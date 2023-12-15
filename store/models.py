@@ -14,7 +14,7 @@ class Product(BaseModelWithUID):
     title = models.CharField(max_length=255)
     slug = AutoSlugField(populate_from="title")
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    discount = models.DecimalField(max_digits=10, decimal_field=2)
+    discount = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.IntegerField()
     image = VersatileImageField(upload_to="product_image/", blank=True)
     status = models.CharField(
