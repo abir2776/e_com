@@ -58,5 +58,6 @@ urlpatterns = [
     path("api/v1/admin/", include("adminapi.rest.urls")),
     path("api/v1/products/", include("store.rest.urls.products")),
     path("api/v1/me/", include("core.rest.urls")),
+    path("api/v1/auth/", include("account.rest.urls.register")),
     path("admin/", admin.site.urls),
 ]
