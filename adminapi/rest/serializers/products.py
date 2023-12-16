@@ -13,7 +13,8 @@ class AdminProductSerializer(serializers.ModelSerializer):
             ("original", "url"),
             ("at256", "crop__256x256"),
             ("at512", "crop__512x512"),
-        ]
+        ],
+        required=False,
     )
     final_price = serializers.CharField(source="get_final_price", read_only=True)
     avg_rating = serializers.CharField(source="averagereview", read_only=True)

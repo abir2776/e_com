@@ -7,7 +7,7 @@ from rest_framework.test import (
 )
 
 
-class BaseAPITestCase(APITestCase):
+class UserRegistrationAPITestCase(APITestCase):
     """Written BaseAPITestCase for not repeating the same code in the test"""
 
     def setUp(self):
