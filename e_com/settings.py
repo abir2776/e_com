@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "core",
     "store",
     "adminapi",
+    "order",
 ]
 
 MIDDLEWARE = [
