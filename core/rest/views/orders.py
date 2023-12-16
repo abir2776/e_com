@@ -12,3 +12,9 @@ class MeOrderList(generics.ListCreateAPIView):
         return Order.objects.prefetch_related("orderitems_set").filter(
             user=self.request.user
         )
+
+
+class MeOrderDetail(generics.RetrieveAPIView):
+    queryset = Order.objects.filter()
+    serializer_class = MeOrderSerializer
+    lookup_field = "uid"

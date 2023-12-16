@@ -79,6 +79,10 @@ class MeOrderSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         product = validated_data.pop("product", None)
         quantity = validated_data.pop("quantity", None)
+        if product.quantity < quantity:
+            raise serializers.ValidationError("There is not enough product in stock!")
+        product.quantity = product.quantity - quantity
+        product.save()
         order = Order.objects.create(user=self.context["request"].user)
         OrderItems.objects.create(order=order, product=product, quantity=quantity)
         return order
